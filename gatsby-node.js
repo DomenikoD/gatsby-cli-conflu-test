@@ -340,6 +340,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage
       html: String!
     }
+
+    interface ApartmentPage implements Node {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage
+      content: [HomepageBlock]
+    }
+
   `)
 
   // CMS-specific types for Homepage
@@ -562,6 +571,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type ContentfulAboutPage implements Node & AboutPage @dontInfer {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage @link(from: "image___NODE")
+      content: [HomepageBlock] @link(from: "content___NODE")
+    }
+    type ContentfulApartmentPage implements Node & ApartmentPage @dontInfer {
       id: ID!
       title: String
       description: String
