@@ -7,7 +7,6 @@ import SEOHead from "../components/head"
 
 export default function Apartment(props) {
   const { apartmentPage } = props.data
-  console.log(apartmentPage)
   return (
     <Layout>
       {apartmentPage.blocks.map((block) => {
