@@ -7,7 +7,7 @@ import SEOHead from "../components/head"
 
 export default function Apartment(props) {
   const { apartmentPage } = props.data
-
+  console.log(apartmentPage)
   return (
     <Layout>
       {apartmentPage.blocks.map((block) => {
@@ -22,6 +22,8 @@ export const Head = (props) => {
   const { apartmentPage } = props.data
   return <SEOHead {...apartmentPage} />
 }
+
+//ovo mora biti ako COntent type ID u Contentful-u
 export const query = graphql`
   {
     apartmentPage {
