@@ -341,8 +341,17 @@ exports.createSchemaCustomization = async ({ actions }) => {
       html: String!
     }
 
-    interface ApartmentPage implements Node {
+    interface ApartmentsPage implements Node {
       id: ID!
+      title: String
+      description: String
+      image: HomepageImage
+      content: [HomepageBlock]
+    }
+
+    interface ApartmentDetails implements Node {
+      id: ID!
+      slug: String!
       title: String
       description: String
       image: HomepageImage
@@ -577,13 +586,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link(from: "image___NODE")
       content: [HomepageBlock] @link(from: "content___NODE")
     }
-    type ContentfulApartmentPage implements Node & ApartmentPage @dontInfer {
-      id: ID!
-      title: String
-      description: String
-      image: HomepageImage @link(from: "image___NODE")
-      content: [HomepageBlock] @link(from: "content___NODE")
-    }
+
   `)
 
   // Layout types
@@ -624,6 +627,18 @@ exports.createSchemaCustomization = async ({ actions }) => {
       description: String
       image: HomepageImage @link(from: "image___NODE")
       html: String! @richText
+    }
+  `)
+
+  // Apartment types
+  actions.createTypes(/* GraphQL */ `
+    type ContentfulApartmentDetails implements Node & ApartmentDetails @dontInfer {
+      id: ID!
+      slug: String!
+      title: String
+      description: String
+      image: HomepageImage @link(from: "image___NODE")
+      content: [HomepageBlock] @link(from: "content___NODE")
     }
   `)
 }
